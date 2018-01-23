@@ -1,0 +1,45 @@
+.logo-small{
+  width: 190px;
+  margin-top: -10px;
+}
+
+@media only screen and (max-width: 600px) {
+    /*.logo-small{ width: 90px; }*/
+    .logo-small{width: 170px;}
+}
+
+a.logo{
+  height: 1px;
+}
+
+.container-book-img{
+  width: 99px;
+}
+
+.book-icon{
+  max-width: 80px;
+}
+
+.book-tittle{
+  font-size: 16px;
+  margin-top: 0px;
+}
+
+.card-panel {
+    padding: 10px;
+    border-radius: 30px;
+}
+
+.row .col .book{
+  margin-left: 3%;
+}
+
+.disponible{
+  color: #0277bd;
+  margin-top: 6px;
+}
+
+.nodisponible{
+  color: #b71c1c;
+  margin-top: 6px;
+}
