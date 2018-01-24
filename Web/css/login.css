@@ -1,0 +1,13 @@
+.logo-small{
+  width: 150px;
+  margin-top: -10px;
+}
+
+@media only screen and (max-width: 600px) {
+    /*.logo-small{ width: 90px; }*/
+    .logo-small{width: 130px;}
+}
+
+a.logo{
+  height: 1px;
+}
