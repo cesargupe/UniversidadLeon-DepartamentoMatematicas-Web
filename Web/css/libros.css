@@ -12,6 +12,10 @@ a.logo{
   height: 1px;
 }
 
+.tittle{
+  padding: 20px;
+}
+
 .container-book-img{
   width: 99px;
 }
