@@ -1,11 +1,11 @@
 .logo-small{
-  width: 190px;
+  width: 150px;
   margin-top: -10px;
 }
 
 @media only screen and (max-width: 600px) {
     /*.logo-small{ width: 90px; }*/
-    .logo-small{width: 170px;}
+    .logo-small{width: 130px;}
 }
 
 a.logo{
@@ -17,12 +17,12 @@ a.logo{
 }
 
 .magacine-icon{
-  max-width: 99px;
+  max-width: 80px;
 }
 
-.magacine-tittle{
+.magacine-status{
   font-size: 16px;
-  margin-top: 0px;
+  margin-top: 6px;
 }
 
 .card-panel {
@@ -35,11 +35,10 @@ a.logo{
 }
 
 .disponible{
-  color: #0277bd;
-  margin-top: 6px;
+  color: #009688;
 }
 
 .nodisponible{
   color: #b71c1c;
-  margin-top: 6px;
+  filter: grayscale(100%);
 }

@@ -16,9 +16,6 @@
   <!-- CSS propios de estilo -->
   <link rel="stylesheet" type="text/css" href="css/revistas.css">
 
-  <!-- Scripts propios -->
-  <script src="js/revistas.js"></script>
-
 </head>
 
 <body>
@@ -26,6 +23,9 @@
   <!--Import jQuery before materialize.js-->
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="js/materialize.min.js"></script>
+
+  <!-- Scripts propios -->
+  <script src="js/revistas.js"></script>
 
   <header>
 
@@ -36,15 +36,27 @@
           <a class="logo" href="/"><img class="responsive-img logo-small" src="img/logo-universidad.png"></a>
         </ul>
 
+        <ul class="left hide-on-med-and-up">
+          <a class="logo hide-on-med-and-up" href="/"><img class="responsive-img logo-small brand-logo" src="img/logo-universidad.png"></a>
+          <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+        </ul>
+
+
         <ul class ="right">
-          <li><a href="#modal_search"><i class="material-icons" title="Buscar libros">search</i></a></li>
+          <li><a href="#modal_search"><i class="material-icons" title="Buscar revistas">search</i></a></li>
           <li><a href="#paginaAdmin"><i class="material-icons" title="Administracion">perm_identity</i></a></li>
         </ul>
 
-        <ul id="nav-mobile" class="left">
+        <ul class="left hide-on-small-only">
           <li><a href="#">Pagina principal</a></li>
           <li><a href="libros.html">Libros</a></li>
-          <li><a class="active teal">Revistas</a></li>
+          <li class="active"><a>Revistas</a></li>
+        </ul>
+
+        <ul class="side-nav" id="mobile-demo">
+          <li><a href="#">Pagina principal</a></li>
+          <li><a href="libros.html">Libros</a></li>
+          <li class="active"><a>Revistas</a></li
         </ul>
 
       </div>
@@ -56,24 +68,25 @@
 
     <h4 class="center-align">Revistas del Departamento de Matemáticas</h4>
 
-    <div class="books row">
+    <div class="magacines row">
 
       <div class="col s12 m6 l4">
-        <div class="card-panel  cyan lighten-5 z-depth-3">
+        <div class="card-panel  brown lighten-5 z-depth-3">
           <div class="valign-wrapper">
-            <div>
+            <div class="disponible">
 
               <div class="container-magacine-img">
                 <center><img src="img/magacine.png" alt="" class="magacine-icon"></center> <!-- notice the "circle" class -->
               </div>
-              <p class="magacine-tittle center-align disponible">Disponible</p>
+              <p class="magacine-status center-align">Disponible</p>
 
             </div>
 
             <div class="col s8 magacine">
-              <p class="truncate"><b>Titulo:</b> Titulo del libro</p>
+              <p class="truncate"><b>Titulo:</b> Titulo del librooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo</p>
               <p class="truncate"><b>Autor:</b> Autor del libro</p>
               <p class="truncate"><b>Editorial:</b> Editorial del libro</p>
+              <p class="truncate"><b>Colección:</b> Colección del libro</p>
               <p class="truncate"><b>ISBN:</b> ISBN del libro</p>
             </div>
 
@@ -82,21 +95,22 @@
       </div>
 
       <div class="col s12 m6 l4">
-        <div class="card-panel  cyan lighten-5 z-depth-3">
+        <div class="card-panel  brown lighten-5 z-depth-3">
           <div class="valign-wrapper">
-            <div>
+            <div class="nodisponible">
 
               <div class="container-magacine-img">
                 <center><img src="img/magacine.png" alt="" class="magacine-icon"></center> <!-- notice the "circle" class -->
               </div>
-              <p class="magacine-tittle center-align nodisponible">No disponible</p>
+              <p class="magacine-status center-align">No disponible</p>
 
             </div>
 
             <div class="col s8 magacine">
-              <p class="truncate"><b>Titulo:</b> Titulo del libro</p>
+              <p class="truncate"><b>Titulo:</b> Titulo del librooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo</p>
               <p class="truncate"><b>Autor:</b> Autor del libro</p>
               <p class="truncate"><b>Editorial:</b> Editorial del libro</p>
+              <p class="truncate"><b>Colección:</b> Colección del libro</p>
               <p class="truncate"><b>ISBN:</b> ISBN del libro</p>
             </div>
 
@@ -105,21 +119,22 @@
       </div>
 
       <div class="col s12 m6 l4">
-        <div class="card-panel  cyan lighten-5 z-depth-3">
+        <div class="card-panel  brown lighten-5 z-depth-3">
           <div class="valign-wrapper">
-            <div>
+            <div class="disponible">
 
               <div class="container-magacine-img">
                 <center><img src="img/magacine.png" alt="" class="magacine-icon"></center> <!-- notice the "circle" class -->
               </div>
-              <p class="magacine-tittle center-align disponible">Disponible</p>
+              <p class="magacine-status center-align">Disponible</p>
 
             </div>
 
             <div class="col s8 magacine">
-              <p class="truncate"><b>Titulo:</b> Titulo del libro</p>
+              <p class="truncate"><b>Titulo:</b> Titulo del librooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo</p>
               <p class="truncate"><b>Autor:</b> Autor del libro</p>
               <p class="truncate"><b>Editorial:</b> Editorial del libro</p>
+              <p class="truncate"><b>Colección:</b> Colección del libro</p>
               <p class="truncate"><b>ISBN:</b> ISBN del libro</p>
             </div>
 
@@ -127,7 +142,9 @@
         </div>
       </div>
 
-    </div>
+
+
+  </div>
 
 
 
