@@ -8,6 +8,15 @@ main {
   flex: 1 0 auto;
 }
 
+.tittle-modal{
+  margin-left: 10px;
+}
+
+.btnModal{
+  display: inline;
+  margin-left: 40px;
+}
+
 .logo-small{
   width: 150px;
   margin-top: -10px;
