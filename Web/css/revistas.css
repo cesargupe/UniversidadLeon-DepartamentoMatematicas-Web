@@ -10,10 +10,22 @@ main {
 
 .modal{
   max-height: 100%;
+  padding-bottom: 30px;
+}
+
+.btn-close-modal{
+  position: absolute;
+  right: 18px;
+  top: 18px;
+}
+
+.modal-footer{
+  margin-top: -30px;
 }
 
 .tittle-modal{
   margin-left: 10px;
+  display: inline;
 }
 
 .btnModal{
