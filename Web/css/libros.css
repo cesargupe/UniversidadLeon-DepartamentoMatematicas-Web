@@ -15,8 +15,8 @@ main {
 
 .btn-close-modal{
   position: absolute;
-  right: 18px;
-  top: 18px;
+  right: 15px;
+  top: 15px;
 }
 
 .modal-footer{
@@ -70,7 +70,7 @@ a.logo{
 }
 
 .row .col .book{
-  margin-left: 3%;
+  margin-left: 1%;
 }
 
 .disponible{
