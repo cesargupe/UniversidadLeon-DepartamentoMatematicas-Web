@@ -8,7 +8,7 @@ $( document ).ready(function(){
     e.preventDefault();
 
     if(!$('#file').prop('files')[0]){
-      Materialize.toast('No hay seleccionado ningún archivo', 5000, 'rounded blue');
+      Materialize.toast('No hay seleccionado ningún archivo', 5000, 'rounded red');
       return;
     }
 
@@ -23,14 +23,17 @@ $( document ).ready(function(){
       processData:false         // To send DOMDocument or non processed data file it is set to false
     });
 
-    request.done(function( msg ) {
+    request.done(function(msg) {
 
-      finishLoadData();
+      //alert(msg);
+      if(msg == "ok") finishLoadData();
 
     });
 
     request.fail(function( jqXHR, textStatus ) {
+
       alert( "Request failed: " + textStatus );
+
     });
 
   }));
@@ -46,7 +49,15 @@ function printLoadData() {
 
 function finishLoadData() {
 
+  $('#finishUpload').show();
+  $('#preloader').hide();
+
+}
+
+function resetView(){
+
   $('#form').show();
   $('#preloader').hide();
+  $('#finishUpload').hide();
 
 }

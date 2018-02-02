@@ -1,3 +1,30 @@
+<?php
+
+/* Comienzo de la sesion*/
+session_start();
+
+/* Si el usuario ya inicio sesión le redirigimos a la pagina de administración */
+if(isset($_SESSION['user'])){
+
+  header("Location: admin.php");
+
+}
+
+/* Esta función no indicara si se produjo un error iniciando sesión */
+function printError(){
+
+  /* Si hay algun error lo imprimimos y luego lo eliminamos */
+  if(isset($_SESSION['error'])){
+
+    echo $_SESSION['error'];
+    unset($_SESSION['error']);
+
+  }
+
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -70,63 +97,72 @@
 
     <div class="row">
 
+      <form name="myForm" action="./routes/checkUser.php"
+      onsubmit="return true;" accept-charset="utf-8" method="POST"
+      enctype="multipart/form-data">
+
       <h4 class="center-align tittle teal-text">Administración de la Biblioteca</h4>
 
       <div class="col s12 m8 offset-m2 l6 offset-l3">
-          <div class="card-panel grey lighten-4 row">
+        <div class="card-panel grey lighten-4 row">
 
-            <h5 class="center teal-text">Inicio de sesión</h5>
+          <h5 class="center teal-text">Inicio de sesión</h5>
 
-            <div class="input-field">
-              <i class="material-icons prefix">account_circle</i>
-              <input id="icon_prefix" type="text" class="validate">
-              <label for="icon_prefix">Nombre de usuario</label>
-            </div>
-
-            <div class="input-field">
-              <i class="material-icons prefix">lock</i>
-              <input id="icon_prefix" type="password" name="pass">
-              <label for="icon_prefix">Contraseña</label>
-            </div>
-
-            <br><div class="center">
-              <button class="btn  waves-effect waves-light" type="submit" name="action">Iniciar sesión
-                <i class="material-icons right">send</i>
-              </button>
-            </div>
-
-
+          <div class="input-field">
+            <i class="material-icons prefix">account_circle</i>
+            <input name="username" id="username" type="text" class="validate">
+            <label for="username">Nombre de usuario</label>
           </div>
+
+          <div class="input-field">
+            <i class="material-icons prefix">lock</i>
+            <input name="password" id="password" type="password" name="pass">
+            <label for="password">Contraseña</label>
+          </div>
+
+          <br><div class="center">
+            <button class="btn  waves-effect waves-light" type="submit" name="action">Iniciar sesión
+              <i class="material-icons right">send</i>
+            </button>
+          </div>
+
+          <?php printError(); ?>
+
         </div>
 
+      </div>
+
+      </form>
+
+
+  </div>
+
+</main>
+
+<footer class="page-footer teal lighten-1">
+  <div class="container">
+    <div class="row">
+      <div class="col l6 s12">
+        <h5 class="white-text">Universidad de León</h5>
+        <p class="text-footer">Biblioteca del Departamento de Matemáticas</p>
+      </div>
+      <div class="col l4 offset-l2 s12">
+        <h5 class="white-text">Sobre nosotros</h5>
+        <ul>
+          <li><a class="grey-text text-lighten-3" href="http://www.unileon.es/">Universidad de León</a></li>
+          <li><a class="grey-text text-lighten-3" href="http://departamentos.unileon.es/matematicas/">Departamento de Matemáticas</a></li>
+        </ul>
+      </div>
     </div>
-
-  </main>
-
-  <footer class="page-footer teal lighten-1">
+  </div>
+  <div class="footer-copyright">
     <div class="container">
-      <div class="row">
-        <div class="col l6 s12">
-          <h5 class="white-text">Universidad de León</h5>
-          <p class="text-footer">Biblioteca del Departamento de Matemáticas</p>
-        </div>
-        <div class="col l4 offset-l2 s12">
-          <h5 class="white-text">Sobre nosotros</h5>
-          <ul>
-            <li><a class="grey-text text-lighten-3" href="http://www.unileon.es/">Universidad de León</a></li>
-            <li><a class="grey-text text-lighten-3" href="http://departamentos.unileon.es/matematicas/">Departamento de Matemáticas</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="footer-copyright">
-      <div class="container">
 
-        <span class="white-text">Web desarrollada por <a class="grey-text text-lighten-2" target="blank" href="https://es.linkedin.com/in/c%C3%A9sar-guti%C3%A9rrez-p%C3%A9rez-83432214a">César Gutiérrez Pérez</a></span>
+      <span class="white-text">Web desarrollada por <a class="grey-text text-lighten-2" target="blank" href="https://es.linkedin.com/in/c%C3%A9sar-guti%C3%A9rrez-p%C3%A9rez-83432214a">César Gutiérrez Pérez</a></span>
 
-      </div>
     </div>
-  </footer>
+  </div>
+</footer>
 
 </body>
 

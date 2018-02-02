@@ -6,7 +6,7 @@ session_start();
 * En caso de que un usuario este logueado, se le redirija a la pagina que le
 * corresponde.
 */
-if(!isset($_SESSION['user'])){ /* Si un usuario ha iniciado sesion */
+if(!isset($_SESSION['user'])){ /* Si un usuario no ha iniciado sesion */
 
   header("Location: login.php");
 
@@ -148,6 +148,11 @@ function getUsername(){
 
           </div></center>
 
+          <div id="finishUpload" style="display: none;" onclick="resetView();">
+            <p class="center-align grey-text text-darken-1 text-footer">Archivo subido con éxito.</p>
+            <center><a class="waves-effect waves-light btn">Subir más contenido</a></center>
+          </div>
+
 
 
 
@@ -178,9 +183,8 @@ function getUsername(){
     <div class="footer-copyright">
       <div class="container">
 
-        <!--
         <span class="white-text">Web desarrollada por <a class="grey-text text-lighten-2" target="blank" href="https://es.linkedin.com/in/c%C3%A9sar-guti%C3%A9rrez-p%C3%A9rez-83432214a">César Gutiérrez Pérez</a></span>
-      -->
+
     </div>
   </div>
 </footer>

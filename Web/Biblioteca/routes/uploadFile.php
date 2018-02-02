@@ -3,14 +3,13 @@
 /* Comienzo de la sesion*/
 session_start();
 
-Include('../connectorDB.php');
+Include('../conectorDB.php');
 
 /* Establezco conexion con la base de datos */
-$conection = connectDB();
+$conection = conectDB();
 
-/* JSON para devolver la respuesta */
-$jsondata = array();
-$jsondata['message'] = "error";
+/* Respuesta que devolvere si todo es correcto */
+$response = "ok";
 
 $csvFile = $_FILES["file"]["tmp_name"];
 $csv = readCSV($csvFile);
@@ -23,7 +22,7 @@ foreach ($csv as $book) {
 
 }
 
-echo "gh";
+echo $response;
 
 function saveBook($book){
 
