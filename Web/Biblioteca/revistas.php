@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <meta charset="utf-8">
+  <title>Revistas</title>
+
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import materialize.css-->
+  <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- CSS propios de estilo -->
+  <link rel="stylesheet" type="text/css" href="css/revistas.css">
+
+</head>
+
+<body>
+
+  <!--Import jQuery before materialize.js-->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="js/materialize.min.js"></script>
+
+  <!-- Scripts propios -->
+  <script src="js/revistas.js"></script>
+
+  <header>
+
+    <div class="navbar">
+      <nav class="teal lighten-1" role="navigation">
+        <div class="nav-wrapper">
+
+          <ul class="left hide-on-small-only">
+            <a class="logo" href="http://departamentos.unileon.es/matematicas/"><img class="responsive-img logo-small" src="img/logo-universidad.png"></a>
+          </ul>
+
+          <ul class="left hide-on-med-and-up">
+            <a class="logo hide-on-med-and-up" href="/"><img class="responsive-img logo-small brand-logo" src="img/logo-universidad.png"></a>
+            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+          </ul>
+
+
+          <ul class ="right">
+            <li><a href="#modal_search"><i class="material-icons" title="Buscar revistas">search</i></a></li>
+            <li><a href="login.php"><i class="material-icons" title="Administracion">perm_identity</i></a></li>
+          </ul>
+
+          <ul class="left hide-on-small-only">
+            <li><a href="index.php">Pagina principal</a></li>
+            <li><a href="libros.php">Libros</a></li>
+            <li class="active"><a href="revistas.php">Revistas</a></li>
+          </ul>
+
+          <ul class="side-nav" id="mobile-demo">
+            <li class="active"><a href="index.php">Pagina principal</a></li>
+            <li><a href="libros.php">Libros</a></li>
+            <li class="active"><a href="revistas.php">Revistas</a></li>
+          </ul>
+
+        </div>
+      </nav>
+    </div>
+
+  </header>
+
+  <main>
+
+    <h4 class="center-align tittle teal-text">Revistas del Departamento de Matemáticas</h4>
+
+    <div class="magacines row">
+
+      <div class="col s12 m6 l4">
+        <div class="card-panel  brown lighten-5 z-depth-3">
+          <div class="valign-wrapper">
+            <div class="disponible">
+
+              <div class="container-magacine-img">
+                <center><img src="img/magacine.png" alt="" class="magacine-icon"></center> <!-- notice the "circle" class -->
+              </div>
+              <p class="magacine-status center-align">Disponible</p>
+
+            </div>
+
+            <div class="col s8 magacine">
+              <p class="truncate"><b>Titulo:</b> Titulo del librooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo</p>
+              <p class="truncate"><b>Autor:</b> Autor del libro</p>
+              <p class="truncate"><b>Editorial:</b> Editorial del libro</p>
+              <p class="truncate"><b>Colección:</b> Colección del libro</p>
+              <p class="truncate"><b>ISBN:</b> ISBN del libro</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col s12 m6 l4">
+        <div class="card-panel  brown lighten-5 z-depth-3">
+          <div class="valign-wrapper">
+            <div class="nodisponible">
+
+              <div class="container-magacine-img">
+                <center><img src="img/magacine.png" alt="" class="magacine-icon"></center> <!-- notice the "circle" class -->
+              </div>
+              <p class="magacine-status center-align">No disponible</p>
+
+            </div>
+
+            <div class="col s8 magacine">
+              <p class="truncate"><b>Titulo:</b> Titulo del librooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo</p>
+              <p class="truncate"><b>Autor:</b> Autor del libro</p>
+              <p class="truncate"><b>Editorial:</b> Editorial del libro</p>
+              <p class="truncate"><b>Colección:</b> Colección del libro</p>
+              <p class="truncate"><b>ISBN:</b> ISBN del libro</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col s12 m6 l4">
+        <div class="card-panel  brown lighten-5 z-depth-3">
+          <div class="valign-wrapper">
+            <div class="disponible">
+
+              <div class="container-magacine-img">
+                <center><img src="img/magacine.png" alt="" class="magacine-icon"></center> <!-- notice the "circle" class -->
+              </div>
+              <p class="magacine-status center-align">Disponible</p>
+
+            </div>
+
+            <div class="col s8 magacine">
+              <p class="truncate"><b>Titulo:</b> Titulo del librooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo</p>
+              <p class="truncate"><b>Autor:</b> Autor del libro</p>
+              <p class="truncate"><b>Editorial:</b> Editorial del libro</p>
+              <p class="truncate"><b>Colección:</b> Colección del libro</p>
+              <p class="truncate"><b>ISBN:</b> ISBN del libro</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+
+  </div>
+
+
+
+  </main>
+
+  <!--
+  <footer class="page-footer teal lighten-1">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Universidad de León</h5>
+          <p class="text-footer">Biblioteca del Departamento de Matemáticas</p>
+        </div>
+        <div class="col l4 offset-l2 s12">
+          <h5 class="white-text">Sobre nosotros</h5>
+          <ul>
+            <li><a class="grey-text text-lighten-3" href="http://www.unileon.es/">Universidad de León</a></li>
+            <li><a class="grey-text text-lighten-3" href="http://departamentos.unileon.es/matematicas/">Departamento de Matemáticas</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+
+        <span class="white-text">Web desarrollada por <a class="grey-text text-lighten-2" target="blank" href="https://es.linkedin.com/in/c%C3%A9sar-guti%C3%A9rrez-p%C3%A9rez-83432214a">César Gutiérrez Pérez</a></span>
+
+      </div>
+    </div>
+  </footer>
+-->
+
+</body>
+
+</html>
