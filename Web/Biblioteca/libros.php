@@ -6,17 +6,64 @@ Include('conectorDB.php');
 /* Establezco conexion con la base de datos */
 $conection = conectDB();
 
+
 /* Función para cargar todos los libros de la base de datos */
 function loadBooks(){
 
   /* Recupero la conexión que es una variale globlal */
   global $conection;
 
+  /* Obtengo el titulo, autor, etc introducido en el buscador en caso de
+   * que exixta. Lo escapo para evitar un ataque SQL Inyection.
+   */
+  $autor = mysqli_real_escape_string($conection, $_POST["autor"]);
+  $titulo = mysqli_real_escape_string($conection, $_POST["titulo"]);
+  $editorial = mysqli_real_escape_string($conection, $_POST["editorial"]);
+  $coleccion = mysqli_real_escape_string($conection, $_POST["coleccion"]);
+  $isbn = mysqli_real_escape_string($conection, $_POST["isbn"]);
+
+  /* Si queremos buscar solo los libros disponibles creamos la condición.*/
+  if($_POST["disponible"] == "on") {
+
+    $disponible = "prestado = 'BIBLIOTECA' AND";
+
+  }
+
   /* Creacion de la sentencia para introducir el nuevo lote */
-  $sentence = "SELECT * FROM libros LIMIT 200";
+  $sentence = "SELECT *, id FROM libros WHERE
+
+  ". $disponible ."
+  autor LIKE '%". $autor ."%' AND
+  titulo LIKE '%". $titulo ."%' AND
+  editorial LIKE '%". $editorial ."%' AND
+  coleccion LIKE '%". $coleccion ."%' AND
+  isbn LIKE '%". $isbn ."%'
+
+  ORDER BY id DESC LIMIT 200";
 
   /* Obtengo todos los libros */
   $query = mysqli_query($conection, $sentence) or die("ERROR_CONSULTA_DB");
+
+  /* Obtengo el numero de libros devueltos */
+  $numRows = mysqli_num_rows($query);
+
+  if ($numRows >= 200) {
+
+    /* Si hay 200 digo que solo muestro los 200 ultimos */
+    echo '<h5 class="teal-text center-align col s12">Mostrando solo los libros más recientes.</h5>';
+
+  } elseif ($numRows != 0) {
+
+    /* Si hay menos de 200 digo los que hay */
+    echo '<h5 class="teal-text center-align col s12">Mostrando '. $numRows .' libros.</h5>';
+
+  } else {
+
+    /* Si no hay ningún libro muestro que no hay libros */
+    echo '<h5 class="teal-text center-align col s12">No se encontro ningún libro.</h5>';
+
+  }
+
 
   /* Recorro toda la lista de libros y pinto uno por uno */
   while($book = mysqli_fetch_array($query)){
@@ -70,6 +117,7 @@ function printBook($book){
   $editorial =  '<p class="truncate"><b>Editorial: </b> '. $book[editorial] .' </p>';
   $coleccion =  '<p class="truncate"><b>Colección: </b> '. $book[coleccion] .' </p>';
   $ISBN =  '<p class="truncate"><b>ISBN: </b> '. $book[isbn] .' </p>';
+  $fechaPrestamo =  '<p class="truncate"><b>Visto por ultima vez : </b> '. $book[fecha_prestamo] .' </p>';
 
   /* Pinto el libro con todos sus campos */
   echo '
@@ -86,6 +134,7 @@ function printBook($book){
           '. $editorial .'
           '. $coleccion .'
           '. $ISBN .'
+          '. $fechaPrestamo .'
         </div>
 
       </div>
@@ -130,6 +179,11 @@ function printBook($book){
 
   <!-- Modal buscador -->
   <div id="modal_search" class="modal">
+
+    <form name="myForm" action="libros.php"
+    onsubmit="return true;" accept-charset="utf-8" method="POST"
+    enctype="multipart/form-data">
+
     <div class="modal-content">
       <div class="">
         <h5 class="tittle-modal teal-text">Buscar libros</h5>
@@ -138,28 +192,28 @@ function printBook($book){
 
       <div class="row">
         <div class="input-field col s12 m6">
-          <input value="" id="first_name2" type="text" class="validate">
-          <label class="active" for="first_name2">Título del libro</label>
+          <input value="" name="titulo" id="titulo" type="text" class="validate">
+          <label class="active" for="titulo">Título del libro</label>
         </div>
 
         <div class="input-field col s12 m6">
-          <input value="" id="first_name2" type="text" class="validate">
-          <label class="active" for="first_name2">ISBN del libro</label>
+          <input value="" name="isbn" id="isbn" type="text" class="validate">
+          <label class="active" for="isbn">ISBN del libro</label>
         </div>
 
         <div class="input-field col s12 m6">
-          <input value="" id="first_name2" type="text" class="validate">
-          <label class="active" for="first_name2">Autor del libro</label>
+          <input value="" name="autor" id="autor" type="text" class="validate">
+          <label class="active" for="autor">Autor del libro</label>
         </div>
 
         <div class="input-field col s12 m6">
-          <input value="" id="first_name2" type="text" class="validate">
-          <label class="active" for="first_name2">Editorial del libro</label>
+          <input value="" name="editorial" id="editorial" type="text" class="validate">
+          <label class="active" for="editorial">Editorial del libro</label>
         </div>
 
         <div class="input-field col s12 m6">
-          <input value="" id="first_name2" type="text" class="validate">
-          <label class="active" for="first_name2">Colección</label>
+          <input value="" name="coleccion" id="coleccion" type="text" class="validate">
+          <label class="active" for="coleccion">Colección</label>
         </div>
 
         <div class="col s12 hide-on-med-and-up">
@@ -167,7 +221,7 @@ function printBook($book){
           <div class="switch center-align">
             <label>
               Todos
-              <input type="checkbox">
+              <input name="disponible" type="checkbox">
               <span class="lever"></span>
               Solo disponibles
             </label>
@@ -186,20 +240,24 @@ function printBook($book){
       <div class="switch center-align">
         <label>
           Todos
-          <input type="checkbox">
+          <input name="disponible" type="checkbox">
           <span class="lever"></span>
           Solo disponibles
         </label>
         <div class="btnModal">
-          <a class="modal-action modal-close waves-effect waves-light btn">Buscar</a>
+          <button name="action" type="submit" class="modal-action modal-close waves-effect waves-light btn">Buscar</button>
         </div>
 
       </div>
     </div>
 
     <div class="modal-footer hide-on-med-and-up">
-      <center><a class="modal-action modal-close waves-effect waves-light btn">Buscar</a></center>
+      <center><button name="action" type="submit" class="modal-action modal-close waves-effect waves-light btn">Buscar</button></center>
     </div>
+
+    </form>
+
+
   </div>
 
   <header>
@@ -244,7 +302,6 @@ function printBook($book){
   <main>
 
     <h4 class="center-align tittle teal-text">Libros del Departamento de Matemáticas</h4>
-    <h5 class="teal-text center-align">Mostrando solo los últimos 200 libros.</h5>
 
     <div class="books row">
 

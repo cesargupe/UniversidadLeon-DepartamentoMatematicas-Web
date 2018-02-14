@@ -12,12 +12,12 @@ Include('../conectorDB.php');
 define('ERROR', '<p class="red-text center-align">El nombre de usuario o la contraseña no son correctos.</p>');
 
 
-/* Obtengo los valores insertados en el form mediante POST */
-$username = $_POST['username'];
-$password = $_POST['password'];
-
 /* Establezco conexion con la base de datos */
 $conection = conectDB();
+
+/* Obtengo los valores insertados en el form mediante POST */
+$username = mysqli_real_escape_string($conection, $_POST['username']);
+$password = mysqli_real_escape_string($conection, $_POST['password']);
 
 
 /* Compruebo si el usuario y la contraseña corresponden con un usuario real */

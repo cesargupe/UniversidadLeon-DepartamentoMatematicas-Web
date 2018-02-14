@@ -8,7 +8,7 @@ $( document ).ready(function(){
     e.preventDefault();
 
     if(!$('#file').prop('files')[0]){
-      Materialize.toast('No hay seleccionado ningún archivo', 5000, 'rounded red');
+      Materialize.toast('No hay seleccionado ningún archivo', 5000, 'rounded red lighten-2');
       return;
     }
 
@@ -25,8 +25,7 @@ $( document ).ready(function(){
 
     request.done(function(msg) {
 
-      //alert(msg);
-      if(msg == "ok") finishLoadData();
+      if (msg == "ok") finishLoadData();
 
     });
 
@@ -39,6 +38,52 @@ $( document ).ready(function(){
   }));
 
 });
+
+function deleteContent() {
+
+  var request = $.ajax({
+    url: "./routes/deleteContent.php", // Url to which the request is send
+    type: "POST",             // Type of request to be send, called as method
+    cache: false,             // To unable request pages to be cached
+    processData:false         // To send DOMDocument or non processed data file it is set to false
+  });
+
+  request.done(function(msg) {
+
+    if (msg == "ok") Materialize.toast("Se eliminó el contenido con éxito.", 6000, 'rounded red lighten-2');
+
+  });
+
+  request.fail(function( jqXHR, textStatus ) {
+
+    alert( "Request failed: " + textStatus );
+
+  });
+
+}
+
+function deleteContent() {
+
+  var request = $.ajax({
+    url: "./routes/deleteContent.php", // Url to which the request is send
+    type: "POST",             // Type of request to be send, called as method
+    cache: false,             // To unable request pages to be cached
+    processData:false         // To send DOMDocument or non processed data file it is set to false
+  });
+
+  request.done(function(msg) {
+
+    if (msg == "ok") Materialize.toast("Se eliminó el contenido con éxito.", 6000, 'rounded red lighten-2');
+
+  });
+
+  request.fail(function( jqXHR, textStatus ) {
+
+    alert( "Request failed: " + textStatus );
+
+  });
+
+}
 
 function printLoadData() {
 

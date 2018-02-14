@@ -47,6 +47,9 @@ function getUsername(){
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="js/materialize.min.js"></script>
 
+  <!--Import Font Awesome-->
+  <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+
   <!-- Scripts propios -->
   <script src="js/admin.js"></script>
 
@@ -68,16 +71,17 @@ function getUsername(){
 
           <ul class ="right">
             <li><a href="admin.php"><i class="material-icons" title="Administracion">perm_identity</i></a></li>
+            <li><a href="./routes/closeSesion.php"><i class="fas fa-sign-out-alt"></i></a></li>
           </ul>
 
           <ul class="left hide-on-small-only">
-            <li><a href="index.html">Pagina principal</a></li>
+            <li><a href="index.php">Pagina principal</a></li>
             <li><a href="libros.php">Libros</a></li>
             <li><a href="revistas.php">Revistas</a></li>
           </ul>
 
           <ul class="side-nav" id="mobile-demo">
-            <li><a href="index.html">Pagina principal</a></li>
+            <li><a href="index.php">Pagina principal</a></li>
             <li><a href="libros.php">Libros</a></li>
             <li><a href="revistas.php">Revistas</a></li>
           </ul>
@@ -128,6 +132,10 @@ function getUsername(){
               </button>
             </div>
 
+            <div class="center col s12">
+              <br><a onclick="deleteContent();" class="btn red red lighten-2 waves-effect waves-light">Eliminar contenido</a>
+            </div>
+
           </form>
 
           <br><center><div id="preloader" style="display: none;">
@@ -152,9 +160,6 @@ function getUsername(){
             <p class="center-align grey-text text-darken-1 text-footer">Archivo subido con éxito.</p>
             <center><a class="waves-effect waves-light btn">Subir más contenido</a></center>
           </div>
-
-
-
 
         </div>
 

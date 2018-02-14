@@ -72,13 +72,16 @@
 
     <div class="magacines row">
 
+      <h5 class="teal-text center-align col s12">Este apartado no se encuentra disponible aún.</h5>
+
+      <!--
       <div class="col s12 m6 l4">
         <div class="card-panel  brown lighten-5 z-depth-3">
           <div class="valign-wrapper">
             <div class="disponible">
 
               <div class="container-magacine-img">
-                <center><img src="img/magacine.png" alt="" class="magacine-icon"></center> <!-- notice the "circle" class -->
+                <center><img src="img/magacine.png" alt="" class="magacine-icon"></center>
               </div>
               <p class="magacine-status center-align">Disponible</p>
 
@@ -102,7 +105,7 @@
             <div class="nodisponible">
 
               <div class="container-magacine-img">
-                <center><img src="img/magacine.png" alt="" class="magacine-icon"></center> <!-- notice the "circle" class -->
+                <center><img src="img/magacine.png" alt="" class="magacine-icon"></center>
               </div>
               <p class="magacine-status center-align">No disponible</p>
 
@@ -126,7 +129,7 @@
             <div class="disponible">
 
               <div class="container-magacine-img">
-                <center><img src="img/magacine.png" alt="" class="magacine-icon"></center> <!-- notice the "circle" class -->
+                <center><img src="img/magacine.png" alt="" class="magacine-icon"></center>
               </div>
               <p class="magacine-status center-align">Disponible</p>
 
@@ -143,7 +146,7 @@
           </div>
         </div>
       </div>
-
+    -->
 
 
   </div>
