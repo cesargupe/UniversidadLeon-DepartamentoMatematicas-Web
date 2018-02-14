@@ -29,7 +29,7 @@ function loadBooks(){
 
   }
 
-  /* Creacion de la sentencia para introducir el nuevo lote */
+  /* Creacion de la sentencia para obtener los libros */
   $sentence = "SELECT *, id FROM libros WHERE
 
   ". $disponible ."

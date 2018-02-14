@@ -12,9 +12,47 @@ if(!isset($_SESSION['user'])){ /* Si un usuario no ha iniciado sesion */
 
 }
 
+/* Incluyo el php que tiene la funcion para conectarse con la base de datos
+ * y registrar entrada en el log.
+ */
+Include('./conectorDB.php');
+
+
+/* Establezco conexion con la base de datos */
+$conection = conectDB();
+
+/* Función para obtener el nombre de usuario y pintarlo. */
 function getUsername(){
 
   return $_SESSION['user'];
+
+}
+
+/* Funcion para obtener los usuarios de la base de datos */
+function getUsers(){
+
+  /* Llamada a las variables globales a utilizar */
+  global $conection;
+
+  /* Creacion de la sentencia para obtener los usuarios */
+  $sentence = "SELECT * FROM usuarios WHERE username NOT LIKE 'admin'";
+
+  /* Ejecuto la sentencia */
+  $query = mysqli_query($conection, $sentence) or die("ERROR_CONSULTA_DB");
+
+  /* Recorro toda la lista de usuarios y pinto uno por uno */
+  while($user = mysqli_fetch_array($query)){
+
+    printUser($user);
+
+  }
+
+}
+
+/* Función para pintar los usuarios uno por uno */
+function printUser($user){
+
+  echo '<p class="user-text">'. $user['username'] .' <a id="'. $user['username'] .'" onclick="deleteUser(this.id);" class="btn-floating btn-delete red lighten-2"><i class="material-icons">delete_forever</i></a></p>';
 
 }
 
@@ -52,6 +90,40 @@ function getUsername(){
 
   <!-- Scripts propios -->
   <script src="js/admin.js"></script>
+
+  <!-- Modal addUser -->
+  <div id="modal_addUser" class="modal">
+
+    <div class="modal-content">
+
+      <div class="row">
+
+        <form id="form_addUser" action="" name="myForm" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+
+        <h5 class="tittle-modal center teal-text">Nuevo Usuario</h5>
+        <a class="modal-action modal-close btn-floating btn-close-modal teal lighten-1 right"><i class="material-icons">close</i></a>
+
+        <div class="input-field col s12">
+          <i class="material-icons prefix">account_circle</i>
+          <input name="username" id="username" type="text" class="validate">
+          <label for="username">Nombre de usuario</label>
+        </div>
+
+        <div class="input-field col s12">
+          <i class="material-icons prefix">lock</i>
+          <input name="password" id="password" type="password" name="pass">
+          <label for="password">Contraseña</label>
+        </div>
+
+        <center><button name="action" type="submit" class="modal-action modal-close modal-submit waves-effect waves-light btn">Añadir</button></center>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
 
   <header>
 
@@ -98,13 +170,12 @@ function getUsername(){
 
       <h4 class="center-align tittle teal-text">Bienvenid@ <?php echo getUsername(); ?></h4>
 
-
-      <div class="col s12 m8 offset-m2 l6 offset-l3">
+      <div class="col s10 offset-s1 m8 offset-m2 l6 offset-l1">
         <div class="card-panel grey lighten-4 row">
 
           <h5 class="center teal-text">Gestión de la Biblioteca</h5>
 
-          <form id="form" action="" name="myForm" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+          <form id="form_sendContent" action="" name="myForm" method="post" accept-charset="utf-8" enctype="multipart/form-data">
 
             <div class="file-field input-field col s12">
               <div class="btn">
@@ -121,7 +192,7 @@ function getUsername(){
               <select class="icons">
                 <option value="" disabled selected>Selecciona el contenido</option>
                 <option value="" data-icon="img/book.png" class="left circle">Libros</option>
-                <option value="" data-icon="img/magacine.png" class="left circle">Revistas</option>
+                <option value="" disabled data-icon="img/magacine.png" class="left circle">Revistas (aún no disponible)</option>
               </select>
               <label>Tipo de contenido</label>
             </div>
@@ -133,7 +204,7 @@ function getUsername(){
             </div>
 
             <div class="center col s12">
-              <br><a onclick="deleteContent();" class="btn red red lighten-2 waves-effect waves-light">Eliminar contenido</a>
+              <br><a onclick="deleteContent();" class="btn red lighten-2 waves-effect waves-light">Eliminar contenido</a>
             </div>
 
           </form>
@@ -160,6 +231,27 @@ function getUsername(){
             <p class="center-align grey-text text-darken-1 text-footer">Archivo subido con éxito.</p>
             <center><a class="waves-effect waves-light btn">Subir más contenido</a></center>
           </div>
+
+        </div>
+
+      </div>
+
+      <div class="col s10 offset-s1 m8 offset-m2 l4">
+        <div class="card-panel grey lighten-4 row">
+
+          <center>
+
+            <h5 class="teal-text">Administradores</h5>
+
+            <div class="users">
+
+              <?php getUsers(); ?>
+
+            </div>
+
+            <a href="#modal_addUser" id="sendUser" class="modal-trigger waves-effect waves-light btn"><i class="material-icons right">add</i>Añadir usuario</a>
+
+          </center>
 
         </div>
 

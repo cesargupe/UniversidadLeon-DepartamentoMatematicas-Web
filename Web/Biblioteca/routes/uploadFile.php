@@ -23,72 +23,70 @@ $csvFile = $_FILES["file"]["tmp_name"];
 $csv = readCSV($csvFile);
 
 deleteAllBooks();
-saveBooks($csv);
+
+foreach ($csv as $book) {
+
+  saveBook($book);
+
+}
+
 
 echo $response;
 
 
-function saveBooks($books){
+function saveBook($book){
 
   global $conection, $response;
 
-  foreach ($books as $book) {
-
-    if(count($book) != 11) continue;
+  if(count($book) != 11) return;
 
 
-    /* El numero indica el orden de introdución de cada libro, los últimos
-     * números son de los ultimos libros.
-     */
-    $numero = mysqli_real_escape_string($conection, $book[9]);
+  /* El numero indica el orden de introdución de cada libro, los últimos
+   * números son de los ultimos libros.
+   */
+  $numero = mysqli_real_escape_string($conection, $book[9]);
 
-    $autor = mysqli_real_escape_string($conection, $book[0]);
-    $titulo = mysqli_real_escape_string($conection, $book[1]);
-    $editorial = mysqli_real_escape_string($conection, $book[2]);
-    $anio_edicion = mysqli_real_escape_string($conection, $book[3]);
-    $coleccion = mysqli_real_escape_string($conection, $book[4]);
-    $etiqueta = mysqli_real_escape_string($conection, str_replace(""," ",$book[5]));
-    $fecha_prestamo = mysqli_real_escape_string($conection, $book[6]);
-    $isbn = mysqli_real_escape_string($conection, $book[7]);
-    $localizado = mysqli_real_escape_string($conection, $book[8]);
-    $prestado = mysqli_real_escape_string($conection, $book[10]);
+  $autor = mysqli_real_escape_string($conection, $book[0]);
+  $titulo = mysqli_real_escape_string($conection, $book[1]);
+  $editorial = mysqli_real_escape_string($conection, $book[2]);
+  $anio_edicion = mysqli_real_escape_string($conection, $book[3]);
+  $coleccion = mysqli_real_escape_string($conection, $book[4]);
+  $etiqueta = mysqli_real_escape_string($conection, str_replace(""," ",$book[5]));
+  $fecha_prestamo = mysqli_real_escape_string($conection, $book[6]);
+  $isbn = mysqli_real_escape_string($conection, $book[7]);
+  $localizado = mysqli_real_escape_string($conection, $book[8]);
+  $prestado = mysqli_real_escape_string($conection, $book[10]);
 
-    $sentence .= "INSERT INTO libros(
+  $sentence = "INSERT INTO libros(
 
-      numero,
-      isbn,
-      autor,
-      titulo,
-      coleccion,
-      editorial,
-      etiqueta,
-      anio_edicion,
-      prestado,
-      fecha_prestamo,
-      localizado
+    numero,
+    isbn,
+    autor,
+    titulo,
+    coleccion,
+    editorial,
+    etiqueta,
+    anio_edicion,
+    prestado,
+    fecha_prestamo,
+    localizado
 
-    )
-    VALUES (
-      0, /* No usamos el numero porque no esta bien, a veces tiene texto. */
-      '$isbn',
-      '$autor',
-      '$titulo',
-      '$coleccion',
-      '$editorial',
-      '$etiqueta',
-      '$anio_edicion',
-      '$prestado',
-      '$fecha_prestamo',
-      '$localizado'
-    );";
+  )
+  VALUES (
+    0, /* No usamos el numero porque no esta bien, a veces tiene texto. */
+    '$isbn',
+    '$autor',
+    '$titulo',
+    '$coleccion',
+    '$editorial',
+    '$etiqueta',
+    '$anio_edicion',
+    '$prestado',
+    '$fecha_prestamo',
+    '$localizado'
+  )";
 
-  }
-
-  $query = mysqli_multi_query($conection, $sentence) or die("error");
-
-  if ($query) {
-    
-  }
+  $query = mysqli_query($conection, $sentence) or die("error");
 
 }
 

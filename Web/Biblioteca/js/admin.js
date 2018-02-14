@@ -2,8 +2,9 @@ $( document ).ready(function(){
 
   $(".button-collapse").sideNav();
   $('select').material_select();
+  $('.modal').modal();
 
-  $("#form").on('submit',(function(e) {
+  $("#form_sendContent").on('submit',(function(e) {
 
     e.preventDefault();
 
@@ -37,7 +38,47 @@ $( document ).ready(function(){
 
   }));
 
+
+  $("#form_addUser").on('submit',(function(e) {
+
+    e.preventDefault();
+
+    var request = $.ajax({
+      url: "./routes/addUser.php", // Url to which the request is send
+      type: "POST",             // Type of request to be send, called as method
+      data: new FormData(this), // Data sent to server, a set of key/value pairs (i.e. form fields and values)
+      contentType: false,       // The content type used when sending data to the server.
+      cache: false,             // To unable request pages to be cached
+      processData:false         // To send DOMDocument or non processed data file it is set to false
+    });
+
+    request.done(function(msg) {
+
+      msg = JSON.parse(msg);
+
+      if (msg["success"] == "ok"){
+
+        Materialize.toast('El usuario fue añadido con éxito.', 4000, 'rounded teal');
+        $("#sendUser").before('<p class="user-text">'+ msg["username"] +' <a id="'+ msg["username"] +'" onclick="deleteUser(this.id);" class="btn-floating btn-delete red lighten-1"><i class="material-icons">delete_forever</i></a></p>');
+
+      }else {
+
+        Materialize.toast(msg["error"], 4000, 'rounded red lighten-2');
+
+      }
+
+    });
+
+    request.fail(function( jqXHR, textStatus ) {
+
+      alert( "Request failed: " + textStatus );
+
+    });
+
+  }));
+
 });
+
 
 function deleteContent() {
 
@@ -62,32 +103,47 @@ function deleteContent() {
 
 }
 
-function deleteContent() {
+function deleteUser(id) {
 
-  var request = $.ajax({
-    url: "./routes/deleteContent.php", // Url to which the request is send
-    type: "POST",             // Type of request to be send, called as method
-    cache: false,             // To unable request pages to be cached
-    processData:false         // To send DOMDocument or non processed data file it is set to false
-  });
+  var msg = "¿Estás seguro de que quieres eliminar el usuario " + id + "?";
 
-  request.done(function(msg) {
+  if (confirm(msg)) {
 
-    if (msg == "ok") Materialize.toast("Se eliminó el contenido con éxito.", 6000, 'rounded red lighten-2');
+    var request = $.ajax({
+      url: "./routes/deleteUser.php", // Url to which the request is send
+      type: "POST",             // Type of request to be send, called as method
+      data: {username: id},     // ID del usuario que elimino
+      cache: false              // To unable request pages to be cached
+    });
 
-  });
+    request.done(function(msg) {
 
-  request.fail(function( jqXHR, textStatus ) {
+      if (msg == "ok"){
 
-    alert( "Request failed: " + textStatus );
+        Materialize.toast("El usuario fue eliminado con éxito.", 4000, 'rounded teal');
+        $("#"+id).parent().remove();
 
-  });
+      } else {
+
+        Materialize.toast(msg, 4000, 'rounded red lighten-2');
+
+      }
+    });
+
+    request.fail(function( jqXHR, textStatus ) {
+
+      alert( "Request failed: " + textStatus );
+
+    });
+
+  }
+
 
 }
 
 function printLoadData() {
 
-  $('#form').hide();
+  $('#form_sendContent').hide();
   $('#preloader').show();
 
 }
@@ -101,7 +157,7 @@ function finishLoadData() {
 
 function resetView(){
 
-  $('#form').show();
+  $('#form_sendContent').show();
   $('#preloader').hide();
   $('#finishUpload').hide();
 
