@@ -117,18 +117,18 @@ function printBook($book){
   $editorial =  '<p class="truncate"><b>Editorial: </b> '. $book[editorial] .' </p>';
   $coleccion =  '<p class="truncate"><b>Colección: </b> '. $book[coleccion] .' </p>';
   $ISBN =  '<p class="truncate"><b>ISBN: </b> '. $book[isbn] .' </p>';
-  $fechaPrestamo =  '<p class="truncate"><b>Visto por ultima vez : </b> '. $book[fecha_prestamo] .' </p>';
+  $fechaPrestamo =  '<p class="truncate"><b>Visto por última vez : </b> '. $book[fecha_prestamo] .' </p>';
 
   /* Pinto el libro con todos sus campos */
   echo '
 
   <div class="col s12 m6 l4">
-    <div class="card-panel  brown lighten-5 z-depth-3">
+    <div class="card-panel brown lighten-5 z-depth-3">
       <div class="valign-wrapper">
 
         '. $disponibilidad .'
 
-        <div class="col s8 book">
+        <div class="book">
           '. $titulo .'
           '. $autor .'
           '. $editorial .'

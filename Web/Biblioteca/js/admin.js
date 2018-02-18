@@ -8,12 +8,7 @@ $( document ).ready(function(){
 
     e.preventDefault();
 
-    if(!$('#file').prop('files')[0]){
-      Materialize.toast('No hay seleccionado ningún archivo', 5000, 'rounded red lighten-2');
-      return;
-    }
-
-    printLoadData();
+    initLoadData();
 
     var request = $.ajax({
       url: "./routes/uploadFile.php", // Url to which the request is send
@@ -26,7 +21,16 @@ $( document ).ready(function(){
 
     request.done(function(msg) {
 
-      if (msg == "ok") finishLoadData();
+      if (msg == "ok"){
+
+        finishLoadData();
+
+      } else {
+
+        Materialize.toast(msg, 4000, 'rounded red lighten-2');
+        resetView();
+
+      }
 
     });
 
@@ -59,7 +63,7 @@ $( document ).ready(function(){
       if (msg["success"] == "ok"){
 
         Materialize.toast('El usuario fue añadido con éxito.', 4000, 'rounded teal');
-        $("#sendUser").before('<p class="user-text">'+ msg["username"] +' <a id="'+ msg["username"] +'" onclick="deleteUser(this.id);" class="btn-floating btn-delete red lighten-1"><i class="material-icons">delete_forever</i></a></p>');
+        $("#users").append('<p class="user-text">'+ msg["username"] +' <a id="'+ msg["username"] +'" onclick="deleteUser(this.id);" class="btn-floating btn-delete red lighten-2"><i class="material-icons">delete_forever</i></a></p>');
 
       }else {
 
@@ -138,11 +142,11 @@ function deleteUser(id) {
 
   }
 
-
 }
 
-function printLoadData() {
+function initLoadData() {
 
+  $('#preloader').hide();
   $('#form_sendContent').hide();
   $('#preloader').show();
 
@@ -151,14 +155,15 @@ function printLoadData() {
 function finishLoadData() {
 
   $('#finishUpload').show();
+  $('#form_sendContent').hide();
   $('#preloader').hide();
 
 }
 
 function resetView(){
 
-  $('#form_sendContent').show();
   $('#preloader').hide();
   $('#finishUpload').hide();
+  $('#form_sendContent').show();
 
 }

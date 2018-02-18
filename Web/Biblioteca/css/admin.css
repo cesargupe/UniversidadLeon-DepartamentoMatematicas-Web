@@ -46,7 +46,7 @@ a.logo{
 
 .users{
   height: 242px;
-  overflow: scroll;
+  overflow: auto;
 }
 
 @media only screen and (max-width: 1200px) {

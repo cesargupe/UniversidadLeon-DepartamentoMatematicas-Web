@@ -68,7 +68,8 @@ a.logo{
     border-radius: 30px;
 }
 
-.row .col .magacine{
+.magacine{
+  overflow: auto;
   margin-left: 1%;
 }
 

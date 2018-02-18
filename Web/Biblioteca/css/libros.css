@@ -69,7 +69,8 @@ a.logo{
     border-radius: 30px;
 }
 
-.row .col .book{
+.book{
+  overflow: auto;
   margin-left: 1%;
 }
 

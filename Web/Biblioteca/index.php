@@ -89,7 +89,18 @@
     </div>
 
     <div class="col s12 l6">
-      <h5 class="center-align teal-text">Nuestra labor</h5>
+      <h5 class="center-align teal-text">Información general</h5>
+      <p align="justify">
+        En la Biblioteca del Departemento de Matemáticas se encuetran disponibles
+        algunas obras de bibliografía recomendada por los profesores para el estudio
+        de las distintas asignaturas, así como libros de investigación de diversas
+        áreas de las Matemáticas y temas relacionados.
+      </p>
+
+      <p align="justify">
+        En la Hemeroteca del Departamento se encuentran los últimos números de las
+        colecciones de revistas a las que está suscrito el Departamento.
+      </p>
     </div>
 
 

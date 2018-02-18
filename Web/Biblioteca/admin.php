@@ -189,10 +189,10 @@ function printUser($user){
 
 
             <div class="input-field col s12">
-              <select class="icons">
+              <select name="contentType" class="icons">
                 <option value="" disabled selected>Selecciona el contenido</option>
-                <option value="" data-icon="img/book.png" class="left circle">Libros</option>
-                <option value="" disabled data-icon="img/magacine.png" class="left circle">Revistas (aún no disponible)</option>
+                <option value="books" data-icon="img/book.png" class="left circle">Libros</option>
+                <option value="magacines" data-icon="img/magacine.png" class="left circle">Revistas</option>
               </select>
               <label>Tipo de contenido</label>
             </div>
@@ -228,7 +228,7 @@ function printUser($user){
           </div></center>
 
           <div id="finishUpload" style="display: none;" onclick="resetView();">
-            <p class="center-align grey-text text-darken-1 text-footer">Archivo subido con éxito.</p>
+            <p class="center-align grey-text text-darken-1 text-footer">Se ha actualizado el contenido.</p>
             <center><a class="waves-effect waves-light btn">Subir más contenido</a></center>
           </div>
 
@@ -243,13 +243,13 @@ function printUser($user){
 
             <h5 class="teal-text">Administradores</h5>
 
-            <div class="users">
+            <div id="users" class="users">
 
               <?php getUsers(); ?>
 
             </div>
 
-            <a href="#modal_addUser" id="sendUser" class="modal-trigger waves-effect waves-light btn"><i class="material-icons right">add</i>Añadir usuario</a>
+            <a href="#modal_addUser" class="modal-trigger waves-effect waves-light btn"><i class="material-icons right">add</i>Añadir usuario</a>
 
           </center>
 

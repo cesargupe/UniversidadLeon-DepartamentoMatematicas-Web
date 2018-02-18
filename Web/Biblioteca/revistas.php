@@ -1,3 +1,135 @@
+<?php
+
+/* Incluyo el php que tiene la funcion para conectarse con la base de datos */
+Include('conectorDB.php');
+
+/* Establezco conexion con la base de datos */
+$conection = conectDB();
+
+
+/* Función para cargar todos los libros de la base de datos */
+function loadMagacines(){
+
+  /* Recupero la conexión que es una variale globlal */
+  global $conection;
+
+  /* Creacion de la sentencia para obtener las revistas */
+  $sentence = "SELECT *, id FROM revistas ORDER BY id DESC LIMIT 200";
+
+  /* Obtengo todos las revistas */
+  $query = mysqli_query($conection, $sentence) or die("ERROR_CONSULTA_DB");
+
+  /* Obtengo el numero de revistas devueltas */
+  $numRows = mysqli_num_rows($query);
+
+  if ($numRows >= 200) {
+
+    /* Si hay 200 digo que solo muestro las 200 ultimas */
+    echo '<h5 class="teal-text center-align col s12">Mostrando solo las revistas más recientes.</h5>';
+
+  } elseif ($numRows != 0) {
+
+    /* Si hay menos de 200 digo las que hay */
+    echo '<h5 class="teal-text center-align col s12">Mostrando '. $numRows .' revistas.</h5>';
+
+  } else {
+
+    /* Si no hay ninguna revista muestro que no hay revistas */
+    echo '<h5 class="teal-text center-align col s12">No se encontro ningún revista.</h5>';
+
+  }
+
+
+  /* Recorro toda la lista de revistas y pinto una por una */
+  while($magacine = mysqli_fetch_array($query)){
+
+    printMagacine($magacine);
+
+  }
+
+}
+
+/* Esta funcion es para pintar las revistas obtenidos */
+function printMagacine($magacine){
+
+  /* Miramos si la revistas esta disponible, estará disponible solo si se
+   * encuentra en la biblioteca, si no no */
+ if($magacine[ubicacion] == "BIBLIOTECA" || true /* De momento pongo todos dispobibles */){
+
+    $disponibilidad = '
+
+    <div class="disponible">
+
+      <div class="container-magacine-img">
+        <center><img src="img/magacine.png" alt="" class="magacine-icon"></center>
+      </div>
+      <p class="magacine-status center-align">Disponible</p>
+
+    </div>
+
+    ';
+
+  }else {
+
+    $disponibilidad = '
+
+    <div class="nodisponible">
+
+      <div class="container-magacine-img">
+        <center><img src="img/magacine.png" alt="" class="magacine-icon"></center>
+      </div>
+      <p class="magacine-status center-align">No disponible</p>
+
+    </div>
+
+    ';
+
+  }
+
+  /* Obtengo todos los campos que necesito para pintarlas */
+  $titulo =  '<p class="truncate"><b>Titulo: </b> '. $magacine[titulo] .' </p>';
+  $numRegistro =  '<p class="truncate"><b>Nº de registro: </b> '. $magacine[numero] .' </p>';
+  $editor =  '<p class="truncate"><b>Editor: </b> '. $magacine[editor] .' </p>';
+  $periodicidad =  '<p class="truncate"><b>Periodicidad: </b> '. $magacine[periodicidad] .' </p>';
+  $proveedor =  '<p class="truncate"><b>Proveedor: </b> '. $magacine[proveedor] .' </p>';
+  $antiguedad =  '<p class="truncate"><b>Antigüedad : </b> '. $magacine[antiguedad] .' </p>';
+  $vistoUltimaVez =  '<p class="truncate"><b>Visto por última vez : </b> '. $magacine[ultima_modificacion] .' </p>';
+  $numeros =  '<p id='. $magacine[numero] .' class="numeros truncate"><b>Números : </b> '. $magacine[numeros] .' </p>';
+
+  /* Pinto la revista con todos sus campos */
+  echo '
+
+  <div class="col s12 m6 l4">
+    <div class="card-panel brown lighten-5 z-depth-3">
+      <div class="valign-wrapper">
+
+        '. $disponibilidad .'
+
+        <div class="magacine">
+          '. $titulo .'
+          '. $numRegistro .'
+          '. $editor .'
+          '. $periodicidad .'
+          '. $proveedor .'
+          '. $antiguedad .'
+          '. $vistoUltimaVez .'
+          '. $numeros .'
+        </div>
+
+      </div>
+      <center>
+        <a id="moreSize'. $magacine[numero] .'" onClick="moreSize('. $magacine[numero] .');" class="btn-floating waves-effect waves-light"><i class="material-icons">arrow_drop_down</i></a>
+        <a id="lessSize'. $magacine[numero] .'" onClick="lessSize('. $magacine[numero] .');" class="btn-floating waves-effect waves-light" style="display: none;"><i class="material-icons">arrow_drop_up</i></a>
+      </center>
+    </div>
+  </div>
+
+  ';
+
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -44,7 +176,7 @@
 
 
           <ul class ="right">
-            <li><a href="#modal_search"><i class="material-icons" title="Buscar revistas">search</i></a></li>
+            <!--<li><a href="#modal_search"><i class="material-icons" title="Buscar revistas">search</i></a></li>-->
             <li><a href="login.php"><i class="material-icons" title="Administracion">perm_identity</i></a></li>
           </ul>
 
@@ -72,81 +204,11 @@
 
     <div class="magacines row">
 
-      <h5 class="teal-text center-align col s12">Este apartado no se encuentra disponible aún.</h5>
+      <?php
 
-      <!--
-      <div class="col s12 m6 l4">
-        <div class="card-panel  brown lighten-5 z-depth-3">
-          <div class="valign-wrapper">
-            <div class="disponible">
+      loadMagacines();
 
-              <div class="container-magacine-img">
-                <center><img src="img/magacine.png" alt="" class="magacine-icon"></center>
-              </div>
-              <p class="magacine-status center-align">Disponible</p>
-
-            </div>
-
-            <div class="col s8 magacine">
-              <p class="truncate"><b>Titulo:</b> Titulo del librooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo</p>
-              <p class="truncate"><b>Autor:</b> Autor del libro</p>
-              <p class="truncate"><b>Editorial:</b> Editorial del libro</p>
-              <p class="truncate"><b>Colección:</b> Colección del libro</p>
-              <p class="truncate"><b>ISBN:</b> ISBN del libro</p>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-      <div class="col s12 m6 l4">
-        <div class="card-panel  brown lighten-5 z-depth-3">
-          <div class="valign-wrapper">
-            <div class="nodisponible">
-
-              <div class="container-magacine-img">
-                <center><img src="img/magacine.png" alt="" class="magacine-icon"></center>
-              </div>
-              <p class="magacine-status center-align">No disponible</p>
-
-            </div>
-
-            <div class="col s8 magacine">
-              <p class="truncate"><b>Titulo:</b> Titulo del librooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo</p>
-              <p class="truncate"><b>Autor:</b> Autor del libro</p>
-              <p class="truncate"><b>Editorial:</b> Editorial del libro</p>
-              <p class="truncate"><b>Colección:</b> Colección del libro</p>
-              <p class="truncate"><b>ISBN:</b> ISBN del libro</p>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-      <div class="col s12 m6 l4">
-        <div class="card-panel  brown lighten-5 z-depth-3">
-          <div class="valign-wrapper">
-            <div class="disponible">
-
-              <div class="container-magacine-img">
-                <center><img src="img/magacine.png" alt="" class="magacine-icon"></center>
-              </div>
-              <p class="magacine-status center-align">Disponible</p>
-
-            </div>
-
-            <div class="col s8 magacine">
-              <p class="truncate"><b>Titulo:</b> Titulo del librooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo</p>
-              <p class="truncate"><b>Autor:</b> Autor del libro</p>
-              <p class="truncate"><b>Editorial:</b> Editorial del libro</p>
-              <p class="truncate"><b>Colección:</b> Colección del libro</p>
-              <p class="truncate"><b>ISBN:</b> ISBN del libro</p>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    -->
+      ?>
 
 
   </div>
