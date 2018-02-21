@@ -42,7 +42,4 @@ function deleteUser(){
   /* Ejecuacion de la sentencia */
   $query = mysqli_query($conection, $sentence) or die("No se ha podido eliminar el usuario.");
 
-  /* Numero de usuarios devueltos por la query*/
-  $numeroDatosDevueltos = mysqli_num_rows ( $query);
-
 }

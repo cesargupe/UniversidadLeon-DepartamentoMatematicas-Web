@@ -20,7 +20,7 @@ function loadBooks(){
   $titulo = mysqli_real_escape_string($conection, $_POST["titulo"]);
   $editorial = mysqli_real_escape_string($conection, $_POST["editorial"]);
   $coleccion = mysqli_real_escape_string($conection, $_POST["coleccion"]);
-  $isbn = mysqli_real_escape_string($conection, $_POST["isbn"]);
+  $anio = mysqli_real_escape_string($conection, $_POST["anio"]);
 
   /* Si queremos buscar solo los libros disponibles creamos la condición.*/
   if($_POST["disponible"] == "on") {
@@ -37,7 +37,7 @@ function loadBooks(){
   titulo LIKE '%". $titulo ."%' AND
   editorial LIKE '%". $editorial ."%' AND
   coleccion LIKE '%". $coleccion ."%' AND
-  isbn LIKE '%". $isbn ."%'
+  anio_edicion LIKE '%". $anio ."%'
 
   ORDER BY id DESC LIMIT 200";
 
@@ -50,7 +50,7 @@ function loadBooks(){
   if ($numRows >= 200) {
 
     /* Si hay 200 digo que solo muestro los 200 ultimos */
-    echo '<h5 class="teal-text center-align col s12">Mostrando solo los libros más recientes.</h5>';
+    echo '<h5 class="teal-text center-align col s12">Mostrando solo las adquisiciones más recientes.</h5>';
 
   } elseif ($numRows != 0) {
 
@@ -111,13 +111,27 @@ function printBook($book){
 
   }
 
+  /* Si no exixste el campo en la base de datos indicamos que hay que consultar con la administración. */
+  if(empty($book[titulo])) $book[titulo] =  'Consultar con la administración';
+  if(empty($book[autor])) $book[autor] =  'Consultar con la administración';
+  if(empty($book[editorial])) $book[editorial] =  'Consultar con la administración';
+  if(empty($book[anio_edicion])) $book[anio_edicion] =  'Consultar con la administración';
+  if(empty($book[isbn])) $book[isbn] =  'Consultar con la administración';
+  if(empty($book[fecha_prestamo])) $book[fecha_prestamo] =  'Consultar con la administración';
+
+
   /* Obtengo todos los campos que necesito para pintarlos */
-  $titulo =  '<p class="truncate"><b>Titulo: </b> '. $book[titulo] .' </p>';
+  $titulo =  '<p class="truncate"><b>Título: </b> '. $book[titulo] .' </p>';
   $autor =  '<p class="truncate"><b>Autor: </b> '. $book[autor] .' </p>';
   $editorial =  '<p class="truncate"><b>Editorial: </b> '. $book[editorial] .' </p>';
+  $anio =  '<p class="truncate"><b>Año de edición: </b> '. $book[anio_edicion] .' </p>';
   $coleccion =  '<p class="truncate"><b>Colección: </b> '. $book[coleccion] .' </p>';
   $ISBN =  '<p class="truncate"><b>ISBN: </b> '. $book[isbn] .' </p>';
   $fechaPrestamo =  '<p class="truncate"><b>Visto por última vez : </b> '. $book[fecha_prestamo] .' </p>';
+
+  /* Si no hay coleccion indicamos que no existe ninguna coleccion. */
+  if(empty($book[coleccion])) $coleccion =  '<p class="truncate"><b>No existe ninguna colección</b></p>';
+
 
   /* Pinto el libro con todos sus campos */
   echo '
@@ -132,8 +146,8 @@ function printBook($book){
           '. $titulo .'
           '. $autor .'
           '. $editorial .'
+          '. $anio .'
           '. $coleccion .'
-          '. $ISBN .'
           '. $fechaPrestamo .'
         </div>
 
@@ -196,14 +210,19 @@ function printBook($book){
           <label class="active" for="titulo">Título del libro</label>
         </div>
 
-        <div class="input-field col s12 m6">
+        <!--<div class="input-field col s12 m6">
           <input value="" name="isbn" id="isbn" type="text" class="validate">
           <label class="active" for="isbn">ISBN del libro</label>
-        </div>
+        </div>-->
 
         <div class="input-field col s12 m6">
           <input value="" name="autor" id="autor" type="text" class="validate">
           <label class="active" for="autor">Autor del libro</label>
+        </div>
+
+        <div class="input-field col s12 m6">
+          <input value="" name="anio" id="anio" type="text" class="validate">
+          <label class="active" for="anio">Año de edición</label>
         </div>
 
         <div class="input-field col s12 m6">

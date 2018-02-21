@@ -13,8 +13,8 @@ if(!isset($_SESSION['user'])){ /* Si un usuario no ha iniciado sesion */
 }
 
 /* Incluyo el php que tiene la funcion para conectarse con la base de datos
- * y registrar entrada en el log.
- */
+* y registrar entrada en el log.
+*/
 Include('./conectorDB.php');
 
 
@@ -32,7 +32,7 @@ function getUsername(){
 function getUsers(){
 
   /* Llamada a las variables globales a utilizar */
-  global $conection;
+  global $conection, $usernames;
 
   /* Creacion de la sentencia para obtener los usuarios */
   $sentence = "SELECT * FROM usuarios WHERE username NOT LIKE 'admin'";
@@ -40,19 +40,40 @@ function getUsers(){
   /* Ejecuto la sentencia */
   $query = mysqli_query($conection, $sentence) or die("ERROR_CONSULTA_DB");
 
+  /* Declaro e inicializo los usuarios y sus botones para eliminarlos. */
+  $usernames = "";
+  $deleteButtons = "";
+
   /* Recorro toda la lista de usuarios y pinto uno por uno */
   while($user = mysqli_fetch_array($query)){
 
-    printUser($user);
+    $usernames .= '<div class="height-45"><span id="span'. $user['username'] .'" class="user-text">'. $user['username'] .'</span></div>';
+    $deleteButtons .= '<div class="height-45"><a id="a'. $user['username'] .'" onclick="deleteUser(\''. $user['username'] .'\');" class="btn-floating btn-delete red lighten-2"><i class="material-icons">delete_forever</i></a></div>';
 
   }
 
+  printBlockUser($usernames, $deleteButtons);
+
 }
 
-/* Función para pintar los usuarios uno por uno */
-function printUser($user){
+/* Funcion para pintar el bloque con los usuarios. */
+function printBlockUser($usernames, $deleteButtons){
 
-  echo '<p class="user-text">'. $user['username'] .' <a id="'. $user['username'] .'" onclick="deleteUser(this.id);" class="btn-floating btn-delete red lighten-2"><i class="material-icons">delete_forever</i></a></p>';
+  /* Codigo html para pintar los usuarios. */
+  $usersBlock = '
+
+  <div id="usernames" class="users-grid">
+  '. $usernames .'
+  </div>
+
+  <div id="deleteButtons" class="users-grid">
+  '. $deleteButtons .'
+  </div>
+
+  ';
+
+  /* Pinto todo el bloque html para ver los uusrios. */
+  echo $usersBlock;
 
 }
 
@@ -86,7 +107,7 @@ function printUser($user){
   <script type="text/javascript" src="js/materialize.min.js"></script>
 
   <!--Import Font Awesome-->
-  <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+  <script defer src="js/fontawesome-all.js"></script>
 
   <!-- Scripts propios -->
   <script src="js/admin.js"></script>
@@ -100,22 +121,22 @@ function printUser($user){
 
         <form id="form_addUser" action="" name="myForm" method="post" accept-charset="utf-8" enctype="multipart/form-data">
 
-        <h5 class="tittle-modal center teal-text">Nuevo Usuario</h5>
-        <a class="modal-action modal-close btn-floating btn-close-modal teal lighten-1 right"><i class="material-icons">close</i></a>
+          <h5 class="tittle-modal center teal-text">Nuevo Usuario</h5>
+          <a class="modal-action modal-close btn-floating btn-close-modal teal lighten-1 right"><i class="material-icons">close</i></a>
 
-        <div class="input-field col s12">
-          <i class="material-icons prefix">account_circle</i>
-          <input name="username" id="username" type="text" class="validate">
-          <label for="username">Nombre de usuario</label>
-        </div>
+          <div class="input-field col s12">
+            <i class="material-icons prefix">account_circle</i>
+            <input name="username" id="username" type="text" class="validate">
+            <label for="username">Nombre de usuario</label>
+          </div>
 
-        <div class="input-field col s12">
-          <i class="material-icons prefix">lock</i>
-          <input name="password" id="password" type="password" name="pass">
-          <label for="password">Contraseña</label>
-        </div>
+          <div class="input-field col s12">
+            <i class="material-icons prefix">lock</i>
+            <input name="password" id="password" type="password" name="pass">
+            <label for="password">Contraseña</label>
+          </div>
 
-        <center><button name="action" type="submit" class="modal-action modal-close modal-submit waves-effect waves-light btn">Añadir</button></center>
+          <center><button name="action" type="submit" class="modal-action modal-close modal-submit waves-effect waves-light btn">Añadir</button></center>
 
         </form>
 
@@ -243,6 +264,7 @@ function printUser($user){
 
             <h5 class="teal-text">Administradores</h5>
 
+
             <div id="users" class="users">
 
               <?php getUsers(); ?>
@@ -282,9 +304,9 @@ function printUser($user){
 
         <span class="white-text">Web desarrollada por <a class="grey-text text-lighten-2" target="blank" href="https://es.linkedin.com/in/c%C3%A9sar-guti%C3%A9rrez-p%C3%A9rez-83432214a">César Gutiérrez Pérez</a></span>
 
+      </div>
     </div>
-  </div>
-</footer>
+  </footer>
 
 </body>
 

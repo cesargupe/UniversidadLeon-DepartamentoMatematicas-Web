@@ -21,7 +21,8 @@ $conection = conectDB();
 $response = "ok";
 
 /* Funcion para eliminar todo el contenido. */
-deleteAllBooks();
+//deleteAllBooks();
+deleteAllMagacines();
 
 /* Devolvemos la respuesta. */
 echo $response;
@@ -35,7 +36,20 @@ function deleteAllBooks(){
   $sentence = "TRUNCATE TABLE libros";
 
   /* Ejecuacion de la sentencia */
-  $query = mysqli_query($conection, $sentence) or die($jsondata);
+  $query = mysqli_query($conection, $sentence) or die("error");
+
+}
+
+function deleteAllMagacines(){
+
+  /* Llamada a las variables globales a utilizar */
+  global $conection;
+
+  /* Creamos la sentencia para eliminar el contenido. */
+  $sentence = "TRUNCATE TABLE revistas";
+
+  /* Ejecuacion de la sentencia */
+  $query = mysqli_query($conection, $sentence) or die("error");
 
 }
 

@@ -25,7 +25,7 @@ function loadMagacines(){
   if ($numRows >= 200) {
 
     /* Si hay 200 digo que solo muestro las 200 ultimas */
-    echo '<h5 class="teal-text center-align col s12">Mostrando solo las revistas más recientes.</h5>';
+    echo '<h5 class="teal-text center-align col s12">Mostrando solo las adquisiciones más recientes.</h5>';
 
   } elseif ($numRows != 0) {
 
@@ -87,7 +87,7 @@ function printMagacine($magacine){
   }
 
   /* Obtengo todos los campos que necesito para pintarlas */
-  $titulo =  '<p class="truncate"><b>Titulo: </b> '. $magacine[titulo] .' </p>';
+  $titulo =  '<p class="truncate"><b>Título: </b> '. $magacine[titulo] .' </p>';
   $numRegistro =  '<p class="truncate"><b>Nº de registro: </b> '. $magacine[numero] .' </p>';
   $editor =  '<p class="truncate"><b>Editor: </b> '. $magacine[editor] .' </p>';
   $periodicidad =  '<p class="truncate"><b>Periodicidad: </b> '. $magacine[periodicidad] .' </p>';

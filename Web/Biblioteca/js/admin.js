@@ -36,7 +36,8 @@ $( document ).ready(function(){
 
     request.fail(function( jqXHR, textStatus ) {
 
-      alert( "Request failed: " + textStatus );
+      //alert( "Request failed: " + textStatus );
+      Materialize.toast("Se ha producido un error desconocido.", 6000, 'rounded red lighten-2');
 
     });
 
@@ -63,7 +64,8 @@ $( document ).ready(function(){
       if (msg["success"] == "ok"){
 
         Materialize.toast('El usuario fue añadido con éxito.', 4000, 'rounded teal');
-        $("#users").append('<p class="user-text">'+ msg["username"] +' <a id="'+ msg["username"] +'" onclick="deleteUser(this.id);" class="btn-floating btn-delete red lighten-2"><i class="material-icons">delete_forever</i></a></p>');
+        $("#usernames").append('<div class="height-45"><span id="span'+ msg["username"] +'" class="user-text">'+ msg["username"] +'</span></div>');
+        $("#deleteButtons").append('<div class="height-45"><a id="a'+ msg["username"] +'" onclick="deleteUser(\''+ msg["username"] +'\');" class="btn-floating btn-delete red lighten-2"><i class="material-icons">delete_forever</i></a></div>');
 
       }else {
 
@@ -75,7 +77,8 @@ $( document ).ready(function(){
 
     request.fail(function( jqXHR, textStatus ) {
 
-      alert( "Request failed: " + textStatus );
+      //alert( "Request failed: " + textStatus );
+      Materialize.toast("Se ha producido un error desconocido.", 6000, 'rounded red lighten-2');
 
     });
 
@@ -101,7 +104,8 @@ function deleteContent() {
 
   request.fail(function( jqXHR, textStatus ) {
 
-    alert( "Request failed: " + textStatus );
+    Materialize.toast("Se ha producido un error desconocido.", 6000, 'rounded red lighten-2');
+    //alert( "Request failed: " + textStatus );
 
   });
 
@@ -125,7 +129,8 @@ function deleteUser(id) {
       if (msg == "ok"){
 
         Materialize.toast("El usuario fue eliminado con éxito.", 4000, 'rounded teal');
-        $("#"+id).parent().remove();
+        $("#a"+id).parent().remove();
+        $("#span"+id).parent().remove();
 
       } else {
 
@@ -136,7 +141,8 @@ function deleteUser(id) {
 
     request.fail(function( jqXHR, textStatus ) {
 
-      alert( "Request failed: " + textStatus );
+      //alert( "Request failed: " + textStatus );
+      Materialize.toast("Se ha producido un error desconocido.", 6000, 'rounded red lighten-2');
 
     });
 
