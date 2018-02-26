@@ -1,0 +1,5 @@
+<h5>Información sobre este panel</h5>
+<p>Este panel se utilizará para:</p>
+<p> - Mostrar los cambios de nuevas actualizaciones.</p>
+<p> - Mostrar mensajes importantes.</p>
+<p> - Mostrar recordatorios.</p>

@@ -28,43 +28,6 @@ function getUsername(){
 
 }
 
-/* Función para pintar los cambios de las actualizaciones. */
-function printUpdate(){
-
-  /* Selecciono el archivo con los cambios. */
-  $update = file('update.txt');
-
-  /* Si el archivo esta vacio no lo imprimimos. */
-  if (count($update) > 1 ) {
-
-    echo '
-
-    <div id="update_message" class="col s10 offset-s1">
-      <div class="message-blue">
-        <a href="#" class="close" onclick="closeMessage();">
-          <i class="material-icons close-icon">close</i>
-        </a>
-
-  ';
-
-  /* Pintamos cada linea del archivo. */
-  foreach($update as $line) {
-
-    echo($line);
-
-  }
-
-    echo '
-
-      </div>
-    </div>
-
-    ';
-
-  }
-
-}
-
 /* Funcion para obtener los usuarios de la base de datos */
 function getUsers(){
 
@@ -226,11 +189,7 @@ function printBlockUser($usernames, $deleteButtons){
 
     <div class="row">
 
-      <?php printUpdate(); ?>
-
-      <div class="col s12">
-        <h4 class="center-align tittle teal-text">Bienvenid@ <?php echo getUsername(); ?></h4>
-      </div>
+      <h4 class="center-align tittle teal-text">Bienvenid@ <?php echo getUsername(); ?></h4>
 
       <div class="col s10 offset-s1 m8 offset-m2 l6 offset-l1">
         <div class="card-panel grey lighten-4 row">

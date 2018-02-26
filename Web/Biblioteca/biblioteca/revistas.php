@@ -35,11 +35,7 @@ function loadMagacines(){
   } else {
 
     /* Si no hay ninguna revista muestro que no hay revistas */
-<<<<<<< Updated upstream
     echo '<h5 class="teal-text center-align col s12">No se encontro ningún revista.</h5>';
-=======
-    echo '<h5 class="teal-text center-align col s12">No se encontro ninguna revista.</h5>';
->>>>>>> Stashed changes
 
   }
 

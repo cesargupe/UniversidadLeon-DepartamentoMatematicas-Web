@@ -332,7 +332,6 @@ function printBook($book){
 
     </main>
 
-    <!--
     <footer class="page-footer teal lighten-1">
       <div class="container">
         <div class="row">
@@ -357,7 +356,6 @@ function printBook($book){
         </div>
       </div>
     </footer>
-  -->
 
 </body>
 

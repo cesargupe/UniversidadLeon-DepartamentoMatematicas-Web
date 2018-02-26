@@ -1,0 +1,88 @@
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+.modal{
+  max-height: 100%;
+  padding-bottom: 30px;
+}
+
+.btn-close-modal{
+  position: absolute;
+  right: 15px;
+  top: 15px;
+}
+
+.modal-footer{
+  margin-top: -30px;
+}
+
+.tittle-modal{
+  margin-left: 10px;
+  display: inline;
+}
+
+.btnModal{
+  display: inline;
+  margin-left: 40px;
+}
+
+.logo-small{
+  width: 150px;
+  margin-top: -10px;
+}
+
+@media only screen and (max-width: 600px) {
+    /*.logo-small{ width: 90px; }*/
+    .logo-small{width: 130px;}
+}
+
+a.logo{
+  height: 1px;
+}
+
+.tittle{
+  padding-top: 10px;
+}
+
+.container-book-img{
+  width: 99px;
+}
+
+.book-icon{
+  max-width: 80px;
+}
+
+.book-status{
+  font-size: 16px;
+  margin-top: 6px;
+}
+
+.card-panel {
+    padding: 10px;
+    border-radius: 30px;
+}
+
+.book{
+  overflow: auto;
+  margin-left: 1%;
+}
+
+.disponible{
+  color: #009688;
+}
+
+.nodisponible{
+  color: #b71c1c;
+  filter: grayscale(100%);
+}
+
+.text-footer{
+  font-size: 18px;
+}

@@ -1,0 +1,31 @@
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+.logo-small{
+  width: 150px;
+  margin-top: -10px;
+}
+
+@media only screen and (max-width: 600px) {
+    /*.logo-small{ width: 90px; }*/
+    .logo-small{width: 130px;}
+}
+
+a.logo{
+  height: 1px;
+}
+
+.tittle{
+  padding-top: 10px;
+}
+
+.text-footer{
+  font-size: 18px;
+}
