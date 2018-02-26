@@ -148,15 +148,12 @@ function deleteUser(id) {
 
   }
 
-<<<<<<< Updated upstream
-=======
 }
 
 function closeMessage() {
 
   $('#update_message').hide();
 
->>>>>>> Stashed changes
 }
 
 function initLoadData() {
