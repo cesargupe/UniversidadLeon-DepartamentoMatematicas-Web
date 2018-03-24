@@ -76,13 +76,24 @@ switch ($contentType) {
 
 echo $response;
 
-
+/* Función para guardar los libros del fichero CSV a la base de datos SQL. */
 function saveBook($book){
 
+  /* Recuperamos la variales globales que necesitamos. */
   global $conection, $response;
 
-  if(count($book) != 11) return;
+  /* Una vez leidos todos los libros salimos de la función. */
+  if(count($book) <= 1) return;
 
+  /* Comprobamos si el fichero CSV tiene más o menos campos de los que debería
+   * tener. Si es así mostramos un error.
+   */
+  if(count($book) != 12){
+
+    $response = "El fichero CSV seleccionado contiene errores.";
+    return;
+
+  }
 
   /* El numero indica el orden de introdución de cada libro, los últimos
    * números son de los ultimos libros.
@@ -99,6 +110,7 @@ function saveBook($book){
   $isbn = mysqli_real_escape_string($conection, $book[7]);
   $localizado = mysqli_real_escape_string($conection, $book[8]);
   $prestado = mysqli_real_escape_string($conection, $book[10]);
+  $fecha_adquisicion = mysqli_real_escape_string($conection, $book[11]);
 
   $sentence = "INSERT INTO libros(
 
@@ -112,7 +124,8 @@ function saveBook($book){
     anio_edicion,
     prestado,
     fecha_prestamo,
-    localizado
+    localizado,
+    fecha_adquisicion
 
   )
   VALUES (
@@ -126,7 +139,8 @@ function saveBook($book){
     '$anio_edicion',
     '$prestado',
     '$fecha_prestamo',
-    '$localizado'
+    '$localizado',
+    '$fecha_adquisicion'
   )";
 
   $query = mysqli_query($conection, $sentence) or die("Se ha producido un error actualizando los libros.");

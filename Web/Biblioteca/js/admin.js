@@ -89,25 +89,31 @@ $( document ).ready(function(){
 
 function deleteContent() {
 
-  var request = $.ajax({
-    url: "./routes/deleteContent.php", // Url to which the request is send
-    type: "POST",             // Type of request to be send, called as method
-    cache: false,             // To unable request pages to be cached
-    processData:false         // To send DOMDocument or non processed data file it is set to false
-  });
+  var msg = "¿Estás seguro de que quieres eliminar todo el contenido?";
 
-  request.done(function(msg) {
+  if (confirm(msg)) {
 
-    if (msg == "ok") Materialize.toast("Se eliminó el contenido con éxito.", 6000, 'rounded red lighten-2');
+    var request = $.ajax({
+      url: "./routes/deleteContent.php", // Url to which the request is send
+      type: "POST",             // Type of request to be send, called as method
+      cache: false,             // To unable request pages to be cached
+      processData:false         // To send DOMDocument or non processed data file it is set to false
+    });
 
-  });
+    request.done(function(msg) {
 
-  request.fail(function( jqXHR, textStatus ) {
+      if (msg == "ok") Materialize.toast("Se eliminó el contenido con éxito.", 6000, 'rounded red lighten-2');
 
-    Materialize.toast("Se ha producido un error desconocido.", 6000, 'rounded red lighten-2');
-    //alert( "Request failed: " + textStatus );
+    });
 
-  });
+    request.fail(function( jqXHR, textStatus ) {
+
+      Materialize.toast("Se ha producido un error desconocido.", 6000, 'rounded red lighten-2');
+      //alert( "Request failed: " + textStatus );
+
+    });
+
+  }
 
 }
 
@@ -153,6 +159,7 @@ function deleteUser(id) {
 function closeMessage() {
 
   $('#update_message').hide();
+  document.cookie = "hide_message=1";
 
 }
 

@@ -21,7 +21,7 @@ $conection = conectDB();
 $response = "ok";
 
 /* Funcion para eliminar todo el contenido. */
-//deleteAllBooks();
+deleteAllBooks();
 deleteAllMagacines();
 
 /* Devolvemos la respuesta. */

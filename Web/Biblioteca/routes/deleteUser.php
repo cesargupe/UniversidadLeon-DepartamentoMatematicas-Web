@@ -3,6 +3,13 @@
 /* Comienzo de la sesion*/
 session_start();
 
+/* Si la sesión del usuario a caducao salgo */
+if(!isset($_SESSION['user'])){
+
+  exit();
+
+}
+
 /* Incluyo el php que tiene la funcion para conectarse con la base de datos
 * y registrar entrada en el log.
 */

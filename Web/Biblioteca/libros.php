@@ -39,7 +39,7 @@ function loadBooks(){
   coleccion LIKE '%". $coleccion ."%' AND
   anio_edicion LIKE '%". $anio ."%'
 
-  ORDER BY id DESC LIMIT 200";
+  ORDER BY id DESC LIMIT 40";
 
   /* Obtengo todos los libros */
   $query = mysqli_query($conection, $sentence) or die("ERROR_CONSULTA_DB");
@@ -47,7 +47,7 @@ function loadBooks(){
   /* Obtengo el numero de libros devueltos */
   $numRows = mysqli_num_rows($query);
 
-  if ($numRows >= 200) {
+  if ($numRows >= 40) {
 
     /* Si hay 200 digo que solo muestro los 200 ultimos */
     echo '<h5 class="teal-text center-align col s12">Mostrando solo las adquisiciones más recientes.</h5>';
@@ -118,6 +118,7 @@ function printBook($book){
   if(empty($book[anio_edicion])) $book[anio_edicion] =  'Consultar con la administración';
   if(empty($book[isbn])) $book[isbn] =  'Consultar con la administración';
   if(empty($book[fecha_prestamo])) $book[fecha_prestamo] =  'Consultar con la administración';
+  if(empty($book[fecha_adquisicion])) $book[fecha_adquisicion] =  'Anterior a 24/03/2018';
 
 
   /* Obtengo todos los campos que necesito para pintarlos */
@@ -128,6 +129,7 @@ function printBook($book){
   $coleccion =  '<p class="truncate"><b>Colección: </b> '. $book[coleccion] .' </p>';
   $ISBN =  '<p class="truncate"><b>ISBN: </b> '. $book[isbn] .' </p>';
   $fechaPrestamo =  '<p class="truncate"><b>Visto por última vez : </b> '. $book[fecha_prestamo] .' </p>';
+  $fechaAdquisicion =  '<p class="truncate"><b>Fecha de adquisición : </b> '. $book[fecha_adquisicion] .' </p>';
 
   /* Si no hay coleccion indicamos que no existe ninguna coleccion. */
   if(empty($book[coleccion])) $coleccion =  '<p class="truncate"><b>No existe ninguna colección</b></p>';
@@ -136,7 +138,7 @@ function printBook($book){
   /* Pinto el libro con todos sus campos */
   echo '
 
-  <div class="col s12 m6 l4">
+  <div class="col s12 m6">
     <div class="card-panel brown lighten-5 z-depth-3">
       <div class="valign-wrapper">
 
@@ -149,6 +151,7 @@ function printBook($book){
           '. $anio .'
           '. $coleccion .'
           '. $fechaPrestamo .'
+          '. $fechaAdquisicion .'
         </div>
 
       </div>

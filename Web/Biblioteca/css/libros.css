@@ -34,13 +34,13 @@ main {
 }
 
 .logo-small{
-  width: 150px;
-  margin-top: -10px;
+  width: 140px;
+  margin-top: -7px;
 }
 
 @media only screen and (max-width: 600px) {
-    /*.logo-small{ width: 90px; }*/
-    .logo-small{width: 130px;}
+  /*.logo-small{ width: 90px; }*/
+  .logo-small{width: 125px;}
 }
 
 a.logo{
@@ -49,6 +49,10 @@ a.logo{
 
 .tittle{
   padding-top: 10px;
+}
+
+.books{
+  max-width: 1100px;
 }
 
 .container-book-img{

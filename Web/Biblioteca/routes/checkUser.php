@@ -55,20 +55,36 @@ function isValidUser(){
   * Creacion de una sentencia para recoger el tipo de usuario, para un usuario
   * con el nombre y contraseña introducidos en el form.
   */
-  $sentence = "SELECT * FROM usuarios WHERE username='$username' AND password='$password'";
+  $sentence = "SELECT * FROM usuarios WHERE username='$username'";
 
   /* Ejecuacion de la sentencia */
   $query = mysqli_query($conection, $sentence) or die("ERROR_CONSULTA_DB");
 
   /* Numero de usuarios devueltos por la query*/
-  $numeroDatosDevueltos = mysqli_num_rows ( $query);
+  $numeroDatosDevueltos = mysqli_num_rows($query);
 
-  /* Compruebo si existe el usuario y devuelvo true */
+  /* Si existe ese nombre de usuario, se raliza el primer paso de la verificación */
   if ($numeroDatosDevueltos > 0) {
-    return true;
+
+    /* Obtenemos la contraseña encriptada de ese usuario. */
+    $password_cryp = mysqli_fetch_array($query)['password'];
+
+    /* Comprouebo si la contraseña introducida se corresponde con la original. */
+    if (password_verify($password, $password_cryp)){
+
+      /* Si se corresponde. */
+      return true;
+
+    }else {
+
+      /* No se corresponde. */
+      return false;
+
+    }
+
   }
 
-  /* Si no existe devuelvo false */
+  /* Si no existe el usuario devuelvo false */
   return false;
 
 }

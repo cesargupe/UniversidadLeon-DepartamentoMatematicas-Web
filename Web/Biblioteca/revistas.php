@@ -99,7 +99,7 @@ function printMagacine($magacine){
   /* Pinto la revista con todos sus campos */
   echo '
 
-  <div class="col s12 m6 l4">
+  <div class="col s12">
     <div class="card-panel brown lighten-5 z-depth-3">
       <div class="valign-wrapper">
 
@@ -118,8 +118,8 @@ function printMagacine($magacine){
 
       </div>
       <center>
-        <a id="moreSize'. $magacine[numero] .'" onClick="moreSize('. $magacine[numero] .');" class="btn-floating waves-effect waves-light"><i class="material-icons">arrow_drop_down</i></a>
-        <a id="lessSize'. $magacine[numero] .'" onClick="lessSize('. $magacine[numero] .');" class="btn-floating waves-effect waves-light" style="display: none;"><i class="material-icons">arrow_drop_up</i></a>
+        <a id="moreSize'. $magacine[numero] .'" onClick="moreSize('. $magacine[numero] .');"><i class="material-icons button-up-down">arrow_drop_down</i></a>
+        <a id="lessSize'. $magacine[numero] .'" onClick="lessSize('. $magacine[numero] .');" style="display: none;"><i class="material-icons button-up-down">arrow_drop_up</i></a>
       </center>
     </div>
   </div>

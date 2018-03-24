@@ -3,10 +3,18 @@
 /* Comienzo de la sesion*/
 session_start();
 
+/* Si la sesión del usuario a caducao salgo */
+if(!isset($_SESSION['user']) && !$_COOKIE["enter"]){
+
+  exit();
+
+}
+
 /* Incluyo el php que tiene la funcion para conectarse con la base de datos
  * y registrar entrada en el log.
  */
 Include('../conectorDB.php');
+
 
 /* Respuesta que devolvere si todo es correcto */
 $response = array();
@@ -34,6 +42,9 @@ if (empty($_POST['username']) || empty($_POST['password'])) {
 $username = mysqli_real_escape_string($conection, $_POST['username']);
 $password = mysqli_real_escape_string($conection, $_POST['password']);
 
+/* Encripto la contraseña para que no sea posible descifrarla si se intercepta. */
+$password_cryp = password_hash($password, PASSWORD_DEFAULT);
+
 /* Creacion de una sentencia para añadir el usuario */
 $sentence .= "INSERT INTO usuarios(
 
@@ -44,7 +55,7 @@ $sentence .= "INSERT INTO usuarios(
 VALUES (
 
   '$username',
-  '$password'
+  '$password_cryp'
 
 );";
 

@@ -6,7 +6,7 @@ session_start();
 * En caso de que un usuario este logueado, se le redirija a la pagina que le
 * corresponde.
 */
-if(!isset($_SESSION['user'])){ /* Si un usuario no ha iniciado sesion */
+if(!isset($_SESSION['user']) && !$_COOKIE["enter"]){ /* Si un usuario no ha iniciado sesion */
 
   header("Location: login.php");
 
@@ -32,10 +32,10 @@ function getUsername(){
 function printUpdate(){
 
   /* Selecciono el archivo con los cambios. */
-  $update = file('update.txt');
+  $file = file('show.txt');
 
   /* Si el archivo esta vacio no lo imprimimos. */
-  if (count($update) > 1 ) {
+  if (count($file) > 1 && !$_COOKIE["hide_message"]) {
 
     echo '
 
@@ -48,7 +48,7 @@ function printUpdate(){
   ';
 
   /* Pintamos cada linea del archivo. */
-  foreach($update as $line) {
+  foreach($file as $line) {
 
     echo($line);
 
@@ -200,7 +200,6 @@ function printBlockUser($usernames, $deleteButtons){
 
 
           <ul class ="right">
-            <li><a href="admin.php"><i class="material-icons" title="Administracion">perm_identity</i></a></li>
             <li><a href="./routes/closeSesion.php"><i class="fas fa-sign-out-alt"></i></a></li>
           </ul>
 

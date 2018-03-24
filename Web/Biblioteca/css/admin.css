@@ -13,13 +13,13 @@ main {
 }
 
 .logo-small{
-  width: 150px;
-  margin-top: -10px;
+  width: 140px;
+  margin-top: -7px;
 }
 
 @media only screen and (max-width: 600px) {
-    /*.logo-small{ width: 90px; }*/
-    .logo-small{width: 130px;}
+  /*.logo-small{ width: 90px; }*/
+  .logo-small{width: 125px;}
 }
 
 a.logo{
@@ -27,8 +27,8 @@ a.logo{
 }
 
 .fa-sign-out-alt{
-  margin-top: 24px;
-  font-size: 17px;
+  margin-top: 22px;
+  font-size: 18px;
 }
 
 @media only screen and (max-width: 600px) {
@@ -70,6 +70,10 @@ a.logo{
 
 .tittle{
   padding-top: 10px;
+}
+
+.card-panel{
+  margin-bottom: 45px;
 }
 
 .users{

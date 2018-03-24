@@ -1,0 +1,6 @@
+<h5>Actualización</h5>
+<p> - Añadida la fecha de adquisición en libros.</p>
+<p> - Ahora solo le muestran las 40 últimas adquisiciones, no las 200.</p>
+<p> - Las contraseñas de los usuarios se guardan encriptadas, siendo imposible descifrarlas.</p>
+<p> - La foto de la página principal ya no tiene la caja de llaves ni los tablones.</p>
+<p> - Cuando se trata de eliminar todo el contenido de libros y resvistas se pide confirmación, evitando una posible confusión.</p>
