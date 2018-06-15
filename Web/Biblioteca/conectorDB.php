@@ -5,9 +5,9 @@
 /*                                                                           */
 /*****************************************************************************/
 
-define ('username', 'cesar');
-define ('password', '1002');
-define ('database', 'biblioteca');
+define ('username', 'wwuledpm');
+define ('password', '2nmr63f4');
+define ('database', 'wwuledpm');
 define ('host', 'localhost');
 define ('ERROR_CONEXION_DB', 'No se ha podido establecer conexion.');
 define ('ERROR_CONSULTA_DB', 'Error al ejecutar la consulta.');

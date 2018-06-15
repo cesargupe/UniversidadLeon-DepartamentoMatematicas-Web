@@ -94,7 +94,7 @@ function printMagacine($magacine){
   $proveedor =  '<p class="truncate"><b>Proveedor: </b> '. $magacine[proveedor] .' </p>';
   $antiguedad =  '<p class="truncate"><b>Antigüedad : </b> '. $magacine[antiguedad] .' </p>';
   $vistoUltimaVez =  '<p class="truncate"><b>Visto por última vez : </b> '. $magacine[ultima_modificacion] .' </p>';
-  $numeros =  '<p id='. $magacine[numero] .' class="numeros truncate"><b>Números : </b> '. $magacine[numeros] .' </p>';
+  $numeros =  '<p id='. $magacine[id] .' class="numeros truncate"><b>Números : </b> '. $magacine[numeros] .' </p>';
 
   /* Pinto la revista con todos sus campos */
   echo '
@@ -118,8 +118,8 @@ function printMagacine($magacine){
 
       </div>
       <center>
-        <a id="moreSize'. $magacine[numero] .'" onClick="moreSize('. $magacine[numero] .');"><i class="material-icons button-up-down">arrow_drop_down</i></a>
-        <a id="lessSize'. $magacine[numero] .'" onClick="lessSize('. $magacine[numero] .');" style="display: none;"><i class="material-icons button-up-down">arrow_drop_up</i></a>
+        <a id="moreSize'. $magacine[id] .'" onClick="moreSize('. $magacine[id] .');"><i class="material-icons button-up-down">arrow_drop_down</i></a>
+        <a id="lessSize'. $magacine[id] .'" onClick="lessSize('. $magacine[id] .');" style="display: none;"><i class="material-icons button-up-down">arrow_drop_up</i></a>
       </center>
     </div>
   </div>

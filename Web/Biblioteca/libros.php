@@ -128,8 +128,8 @@ function printBook($book){
   $anio =  '<p class="truncate"><b>Año de edición: </b> '. $book[anio_edicion] .' </p>';
   $coleccion =  '<p class="truncate"><b>Colección: </b> '. $book[coleccion] .' </p>';
   $ISBN =  '<p class="truncate"><b>ISBN: </b> '. $book[isbn] .' </p>';
-  $fechaPrestamo =  '<p class="truncate"><b>Visto por última vez : </b> '. $book[fecha_prestamo] .' </p>';
-  $fechaAdquisicion =  '<p class="truncate"><b>Fecha de adquisición : </b> '. $book[fecha_adquisicion] .' </p>';
+  $fechaPrestamo =  '<p class="truncate"><b>Visto por última vez: </b> '. $book[fecha_prestamo] .' </p>';
+  $fechaAdquisicion =  '<p class="truncate"><b>Fecha de adquisición: </b> '. $book[fecha_adquisicion] .' </p>';
 
   /* Si no hay coleccion indicamos que no existe ninguna coleccion. */
   if(empty($book[coleccion])) $coleccion =  '<p class="truncate"><b>No existe ninguna colección</b></p>';
